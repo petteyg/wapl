@@ -10,7 +10,7 @@ class WaplHelper extends AppHelper {
 		'head' => "<head>\n%s</head>\n",
 		'item' => "[*]%s[/*]\n",
 		'layout' => "<layout>\n%s</layout>\n",
-		'list' => "[listFIXME]\n%s[/list]\n", // Remove FIXME. Added because Bakery parses list as BBcode.
+		'list' => "[list]\n%s[/list]\n",
 		'row' => "<row>\n%s\n</row>\n",
 		'span' => "[span=%s]%s[/span]",
 		'title' => "<title>%s</title>\n",
@@ -70,7 +70,7 @@ class WaplHelper extends AppHelper {
 				$params = array(
 					'devKey' => $this->devKey,
 					'deviceHeaders' => $headers,
-					'wapl' => $View->output
+					'wapl' => urlencode($View->output)
 				);
 			}
 			$xml = simplexml_load_string($sClient->getMarkupFromWapl($params));

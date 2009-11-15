@@ -58,29 +58,6 @@ class WaplHelper extends AppHelper {
 		return $urls;
 	}
 
-	function afterLayout() {
-		if ($this->test != 'pre') {
-			$View =& ClassRegistry::getObject('view');
-			$sClient = @new SoapClient('http://webservices.wapple.net/wapl.wsdl');
-			$headers = array();
-			foreach($_SERVER as $k => $v) {
-				$headers[] = array('name' => $k, 'value' => $v);
-			}
-			if($sClient) {
-				$params = array(
-					'devKey' => $this->devKey,
-					'deviceHeaders' => $headers,
-					'wapl' => urlencode($View->output)
-				);
-			}
-			$xml = simplexml_load_string($sClient->getMarkupFromWapl($params));
-			foreach ($xml->header->item as $v) {
-				header($v);
-			}
-			$View->output = trim($xml->markup);
-		}
-	}
-
 	function chars($data, $options = array()) {
 		return $this->output(sprintf($this->tags['chars'], $this->_parseAttributes($options), $data));
 	}

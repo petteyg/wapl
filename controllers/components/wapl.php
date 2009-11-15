@@ -1,4 +1,4 @@
-<?php 
+<?php
 class WaplComponent extends Object {
 
 	var $components = array('RequestHandler', 'Session');
@@ -6,7 +6,7 @@ class WaplComponent extends Object {
 	var $force = false;
 	var $path = true;
 	var $test = false;
-	
+
 	function initialize(&$controller, $settings = array()) {
 		$this->controller =& $controller;
 		$this->devKey = $settings['devKey'];
@@ -20,7 +20,7 @@ class WaplComponent extends Object {
 			$this->test = $settings['test'];
 		}
 	}
-	
+
 	function startup(&$controller) {
 		if (!$this->Session->check('User.isMobile') || $this->force) {
 			$sClient = @new SoapClient('http://webservices.wapple.net/wapl.wsdl');
@@ -29,7 +29,7 @@ class WaplComponent extends Object {
 				foreach($_SERVER as $k => $v) {
 					$headers[] = array('name' => $k, 'value' => $v);
 				}
-				$params = array(	
+				$params = array(
 					'devKey' => $this->devKey,
 					'deviceHeaders' => $headers
 				);

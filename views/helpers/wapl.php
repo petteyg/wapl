@@ -1,4 +1,4 @@
-<?php 
+<?php
 class WaplHelper extends AppHelper {
 
 	var $tags = array(
@@ -17,7 +17,7 @@ class WaplHelper extends AppHelper {
 		'url' => "<url>%s</url>",
 		'words' => "<wordsChunk>\n<display_as>%s</display_as>\n<quick_text>%s</quick_text>\n</wordsChunk>\n",
 	);
-	
+
 	var $devKey;
 	var $test = false;
 
@@ -25,7 +25,7 @@ class WaplHelper extends AppHelper {
 		$this->devKey = $settings['devKey'];
 		$this->test = $settings['test'];
 	}
-	
+
 	function _parseAttributes($data) {
 		$attributes = '';
 		foreach($data as $name => $value) {
@@ -33,7 +33,7 @@ class WaplHelper extends AppHelper {
 		}
 		return $attributes;
 	}
-	
+
 	function _parseItems($data) {
 		$items = '';
 		if (is_array($data)) {
@@ -45,7 +45,7 @@ class WaplHelper extends AppHelper {
 		}
 		return $items;
 	}
-	
+
 	function _parseUrls($data) {
 		$urls = '';
 		if (is_array($data)) {
@@ -84,7 +84,7 @@ class WaplHelper extends AppHelper {
 	function chars($data, $options = array()) {
 		return $this->output(sprintf($this->tags['chars'], $this->_parseAttributes($options), $data));
 	}
-	
+
 	function css($data) {
 		return $this->output(sprintf($this->tags['css'], $this->_parseUrls($data)));
 	}
@@ -104,11 +104,11 @@ class WaplHelper extends AppHelper {
 	function layout($data) {
 		return $this->output(sprintf($this->tags['layout'], $data));
 	}
-	
+
 	function ul($data) {
 		return $this->output(sprintf($this->tags['list'], $this->_parseItems($data)));
 	}
-	
+
 	function span($data) {
 		return $this->output(sprintf($this->tags['span'], $data));
 	}
@@ -116,7 +116,7 @@ class WaplHelper extends AppHelper {
 	function title($data) {
 		return $this->output(sprintf($this->tags['title'], $data));
 	}
-	
+
 	function wapl($data) {
 		return $this->output(sprintf('<'.'?xml version="1.0" encoding="UTF-8" ?'.'>'."\n".'<wapl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://wapl.wapple.net/wapl.xsd">'."\n".'%s</wapl>'."\n", $data));
 	}
@@ -124,13 +124,13 @@ class WaplHelper extends AppHelper {
 	function waplend() {
 		return $this->output('</wapl>');
 	}
-	
+
 	function waplstart() {
 		$begin = '<'.'?xml version="1.0" encoding="UTF-8" ?'.'>';
 		$begin .= '<wapl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://wapl.wapple.net/wapl.xsd">';
 		return $this->output($begin);
 	}
-	
+
 	function words($data, $type = 0) {
 		switch($type) {
 			case 1:

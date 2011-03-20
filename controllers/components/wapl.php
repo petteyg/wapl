@@ -39,7 +39,7 @@ class WaplComponent extends Object {
 				$isMobile = true;
 			}
 		}
-		if (!$this->settings['force'] {
+		if (!$this->settings['force']) {
 			$this->Session->write('User.isMobile', $isMobile);
 		}
 		if ($this->Session->read('User.isMobile') || $this->settings['test']) {
